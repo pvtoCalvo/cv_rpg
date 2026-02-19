@@ -37,7 +37,10 @@ export const candidateData: CandidateData = {
     "Linux & Networking (TCP/IP, DNS, TLS)",
     "Security Baselines/Hardening",
     "Cost Optimization",
-    "MySQL Operations"
+    "MySQL Operations",
+    "API Development and Integration",
+    "Python Automation",
+    "PHP & Laravel"
   ],
   experience: [
     {
@@ -47,7 +50,7 @@ export const candidateData: CandidateData = {
       bullets: [
         "Owned design and operation of production Kubernetes platform patterns (multi-AZ connectivity, ingress/LB/WAF, network segmentation, storage/CSI, rollout strategies).",
         "Introduced diagnostics and operational visibility for kernel/disk/NIC issues and Kubernetes node health; reduced time-to-root-cause by 35%.",
-        "Standardized cloud networking and IAM changes with Infrastructure as Code, adding drift detection, policy checks, and operational runbooks.",
+        "Standardized cloud networking and IAM changes with Infrastructure as Code, adding drift detection, policy checks, operational runbooks, and API-driven automation workflows in Python and PHP/Laravel.",
         "Improved release reliability by embedding checks and controls for infrastructure/platform changes and promoting consistent delivery practices.",
         "Led incident response and postmortems end-to-end; converted findings into preventative fixes and platform standards."
       ]
@@ -57,7 +60,7 @@ export const candidateData: CandidateData = {
       role: "Senior SRE & DevOps (Tech Lead)",
       dates: "Nov 2021 - Nov 2022",
       bullets: [
-        "Hands-on tech lead establishing DevOps/SRE guardrails across Infrastructure as Code, CI/CD, and observability for multiple teams.",
+        "Hands-on tech lead establishing DevOps/SRE guardrails across Infrastructure as Code, CI/CD, observability, and API delivery patterns, including Python automation and PHP/Laravel service practices for multiple teams.",
         "Improved delivery pipelines and release strategies (progressive delivery and rollback readiness) to reduce deployment risk.",
         "Standardized AWS/Azure foundations and hardened images to strengthen security baselines and enable repeatable provisioning.",
         "Improved mean time to detect by 25% through alert tuning and SLO-aligned dashboards; aligned monitoring to operational health reviews and on-call readiness.",
@@ -73,7 +76,7 @@ export const candidateData: CandidateData = {
         "Led Kubernetes enablement with standardized deployment templates, ingress patterns, operational playbooks, and security controls.",
         "Supported MySQL operations and reliability improvements, coordinating upgrades and validating backup/restore procedures.",
         "Participated in on-call operations and incident response; produced RCAs and improved runbooks to reduce recurring incidents.",
-        "Reduced operational toil through standardization and automation."
+        "Reduced operational toil through API integrations, Python-based automation, and PHP/Laravel operational tooling standardization."
       ]
     },
     {
@@ -82,7 +85,7 @@ export const candidateData: CandidateData = {
       dates: "Aug 2014 - Nov 2019",
       bullets: [
         "Owned DNS/DHCP services in a telecom production environment, ensuring stability and availability for core network workloads.",
-        "Standardized and automated OSS workflows and operational tasks, reducing manual effort by 20% and improving process reliability.",
+        "Standardized and automated OSS workflows and operational tasks through API integrations, Python automation, and PHP/Laravel tooling, reducing manual effort by 20% and improving process reliability.",
         "Owned and maintained provisioning/operations support systems (including an ACS - Auto Configuration Server) and internal services supporting day-to-day operations.",
         "Led incident troubleshooting across Linux and networking layers (TCP/IP, DNS, TLS), driving RCA and permanent fixes; reduced downtime by 30%.",
         "Created SOPs/runbooks and standardized processes to speed up incident response and knowledge sharing."
@@ -159,7 +162,7 @@ export const profileConfigs: Record<ProfileKey, ProfileConfig> = {
         { id: "contact", title: "Contact" }
       ]
     },
-    competencyOrder: [1, 0, 2, 6, 8, 7, 9, 10, 3, 4, 12, 11, 13, 5],
+    competencyOrder: [1, 0, 2, 6, 8, 7, 9, 10, 3, 4, 12, 11, 13, 14, 15, 16, 5],
     experienceBulletOrder: [
       [1, 4, 0, 3, 2],
       [3, 4, 0, 1, 2],
@@ -226,7 +229,7 @@ export const profileConfigs: Record<ProfileKey, ProfileConfig> = {
         { id: "contact", title: "Contact" }
       ]
     },
-    competencyOrder: [5, 4, 0, 3, 11, 2, 6, 7, 8, 9, 12, 10, 13, 1],
+    competencyOrder: [5, 4, 14, 15, 16, 0, 3, 11, 2, 6, 7, 8, 9, 12, 10, 13, 1],
     experienceBulletOrder: [
       [2, 3, 0, 4, 1],
       [0, 1, 2, 3, 4],
@@ -293,7 +296,7 @@ export const profileConfigs: Record<ProfileKey, ProfileConfig> = {
         { id: "contact", title: "Contact" }
       ]
     },
-    competencyOrder: [0, 1, 5, 4, 2, 6, 7, 8, 9, 3, 11, 10, 12, 13],
+    competencyOrder: [0, 1, 5, 4, 14, 15, 16, 2, 6, 7, 8, 9, 3, 11, 10, 12, 13],
     experienceBulletOrder: [
       [0, 1, 2, 3, 4],
       [0, 3, 1, 2, 4],

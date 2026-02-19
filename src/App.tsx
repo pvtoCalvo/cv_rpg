@@ -103,6 +103,9 @@ function gearByStage(lang: ResumeLang): string[][] {
         skills: [
           "Infrastructure as Code (Terraform, Ansible)",
           "CI/CD and Release Safety (GitLab CI, Argo CD, GitHub Actions)",
+          "API Development and Integration",
+          "Python Automation",
+          "PHP & Laravel",
           "SLOs and Alert Hygiene",
           "Resilience/DR (failover, backup/restore validation)",
           "Cloud Infrastructure (AWS, Azure)"
@@ -144,6 +147,9 @@ function gearByStage(lang: ResumeLang): string[][] {
       skills: [
         "Infrastructure as Code (Terraform, Ansible)",
         "CI/CD and Release Safety (GitLab CI, Argo CD, GitHub Actions)",
+        "API Development and Integration",
+        "Python Automation",
+        "PHP & Laravel",
         "SLOs and Alert Hygiene",
         "Resilience/DR (failover, backup/restore validation)",
         "Cloud Infrastructure (AWS, Azure)"
