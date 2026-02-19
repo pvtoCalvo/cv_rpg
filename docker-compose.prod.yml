@@ -1,0 +1,23 @@
+services:
+  cv-spa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cv-rpg:latest
+    container_name: cv-rpg-prod
+    ports:
+      - "${CV_PORT:-8081}:8080"
+    restart: always
+    init: true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://127.0.0.1:8080/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:size=64m,mode=1777

@@ -41,6 +41,18 @@ docker compose up -d --build
 Abrir en navegador:
 - `http://localhost:8081`
 
+## Ejecucion Docker para produccion
+Usa el compose de produccion con contenedor endurecido y healthcheck:
+```bash
+git clone https://github.com/pvtoCalvo/cv_rpg.git
+cd cv_rpg
+cp .env.example .env
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+Abrir en navegador:
+- `http://TU_SERVIDOR:${CV_PORT}` (por defecto `8081`)
+
 ## Verificar salud del contenedor
 ```bash
 curl http://localhost:8081/health
@@ -53,7 +65,7 @@ Debe responder:
 Dentro de la carpeta del proyecto en el servidor:
 ```bash
 git pull
-docker compose up -d --build
+docker compose -f docker-compose.prod.yml up -d --build
 ```
 
 ## Parar o reiniciar
@@ -70,7 +82,10 @@ docker compose up -d
 - `public/sprites/`: sprite sheets del personaje.
 - `Dockerfile`: build y runtime con Nginx.
 - `docker-compose.yml`: servicio Docker (puerto `8081`).
+- `docker-compose.prod.yml`: configuracion Docker para produccion.
+- `.env.example`: variables de entorno para despliegue.
 
 ## Notas
 - Si el puerto `8081` ya esta ocupado en tu servidor, cambia `docker-compose.yml`.
 - Para exportar PDF usa el boton `Print / Save PDF` en la web.
+- Para cambiar el puerto en produccion, ajusta `CV_PORT` en `.env`.
