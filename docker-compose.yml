@@ -1,0 +1,9 @@
+services:
+  cv-spa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cv-spa
+    ports:
+      - "8081:80"
+    restart: unless-stopped

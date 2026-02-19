@@ -1,0 +1,548 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap");
+
+:root {
+  --bg-1: #1a1231;
+  --bg-2: #281949;
+  --panel: #2f2158;
+  --panel-soft: #3b2a6c;
+  --line: #b794f4;
+  --text: #f5edff;
+  --muted: #d4c3f5;
+  --accent: #9f7aea;
+  --accent-2: #68d391;
+  --shadow: 6px 6px 0 rgba(7, 5, 16, 0.8);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "VT323", monospace;
+  font-size: 1.3rem;
+  color: var(--text);
+  line-height: 1.15;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(159, 122, 234, 0.22), transparent 28%),
+    radial-gradient(circle at 88% 20%, rgba(104, 211, 145, 0.12), transparent 24%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 3px,
+      transparent 3px,
+      transparent 6px
+    ),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
+}
+
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 40;
+}
+
+.card {
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  padding: 0.9rem;
+  margin-bottom: 0.9rem;
+  background:
+    linear-gradient(90deg, rgba(159, 122, 234, 0.16), rgba(104, 211, 145, 0.08)),
+    var(--panel);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Silkscreen", monospace;
+  color: #fff;
+  line-height: 1.28;
+}
+
+h1 {
+  font-size: clamp(0.86rem, 2vw, 1rem);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.headline {
+  margin: 0.6rem 0 0.7rem;
+  color: var(--muted);
+  font-size: 1.12rem;
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: 0.6rem;
+}
+
+.toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.lang-toggle .toggle-btn {
+  min-width: 62px;
+}
+
+.toggle-btn,
+.print-btn {
+  font: inherit;
+  font-size: 1.02rem;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: var(--panel-soft);
+  color: var(--text);
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 3px 3px 0 rgba(8, 5, 19, 0.85);
+  transition: transform 120ms steps(2);
+}
+
+.toggle-btn:hover,
+.print-btn:hover {
+  transform: translate(-1px, -1px);
+}
+
+.toggle-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.print-btn {
+  font-family: "Silkscreen", monospace;
+  font-size: 0.66rem;
+  background: #68d391;
+  color: #15331f;
+}
+
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle-btn:focus-visible,
+.print-btn:focus-visible,
+.journey-node:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.character-panel,
+.journey-panel {
+  padding: 0.75rem;
+}
+
+.character-panel h2,
+.journey-panel h2,
+.info-card h2 {
+  font-size: 0.66rem;
+  margin-bottom: 0.42rem;
+}
+
+.pixel-character {
+  position: relative;
+  width: 172px;
+  height: 184px;
+  margin: 0 auto 0.7rem;
+  image-rendering: pixelated;
+  animation: bob 1.2s ease-in-out infinite;
+}
+
+.pixel-character span {
+  position: absolute;
+  display: block;
+}
+
+.pc-shadow {
+  left: 52px;
+  bottom: 8px;
+  width: 68px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.pc-sprite {
+  left: 22px;
+  top: 30px;
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  background-image: url("/sprites/adventurer-tier0-132x32.png");
+  background-repeat: no-repeat;
+  background-size: 132px 32px;
+  background-position: 0 0;
+  transform: scale(4);
+  transform-origin: top left;
+  filter: drop-shadow(2px 2px 0 rgba(9, 6, 18, 0.9));
+  animation: sprite-run 0.78s steps(1, end) infinite;
+}
+
+.pc-aura {
+  inset: 26px 26px 32px;
+  border-radius: 10px;
+  border: 2px dashed rgba(183, 148, 244, 0.25);
+  opacity: 0.18;
+}
+
+.pixel-character.tier-1 .pc-sprite {
+  background-image: url("/sprites/adventurer-tier1-132x32.png");
+}
+
+.pixel-character.tier-1 .pc-aura {
+  opacity: 0.35;
+}
+
+.pixel-character.tier-2 .pc-sprite {
+  background-image: url("/sprites/adventurer-tier2-132x32.png");
+}
+
+.pixel-character.tier-2 .pc-aura {
+  opacity: 0.5;
+}
+
+.pixel-character.tier-3 .pc-sprite {
+  background-image: url("/sprites/adventurer-tier3-132x32.png");
+  filter:
+    drop-shadow(0 0 8px rgba(159, 122, 234, 0.38))
+    drop-shadow(2px 2px 0 rgba(9, 6, 18, 0.9));
+}
+
+.pixel-character.tier-3 .pc-aura {
+  opacity: 0.7;
+}
+
+.stats-box p {
+  margin: 0.2rem 0;
+}
+
+.xp-title {
+  margin-top: 0.35rem;
+}
+
+.xp-bar {
+  height: 18px;
+  border: 3px solid #1f1736;
+  background: #1c1433;
+  margin: 0.2rem 0 0.35rem;
+}
+
+.xp-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #68d391 0,
+      #68d391 10px,
+      #48bb78 10px,
+      #48bb78 20px
+    );
+  transition: width 320ms steps(10);
+}
+
+.stats-box ul,
+.quest-log ul,
+.info-card ul,
+.print-section ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.journey-panel .panel-hint {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+}
+
+.journey-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.journey-node {
+  width: 100%;
+  text-align: left;
+  background: #3e2c73;
+  border: 3px solid #8b6fd1;
+  color: var(--text);
+  padding: 0.34rem 0.45rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(7, 5, 16, 0.8);
+}
+
+.journey-node.completed {
+  border-color: #68d391;
+}
+
+.journey-node.current {
+  border-color: #f6e05e;
+  background: #5a3ea1;
+}
+
+.journey-company {
+  display: block;
+  font-family: "Silkscreen", monospace;
+  font-size: 0.52rem;
+  margin-bottom: 0.16rem;
+}
+
+.journey-role,
+.journey-dates {
+  display: block;
+  font-size: 1.03rem;
+}
+
+.quest-log {
+  margin-top: 0.65rem;
+  padding-top: 0.45rem;
+  border-top: 3px solid rgba(183, 148, 244, 0.45);
+}
+
+.quest-log h3 {
+  font-size: 0.56rem;
+  margin-bottom: 0.3rem;
+}
+
+.quest-title {
+  margin: 0 0 0.1rem;
+  font-family: "Silkscreen", monospace;
+  font-size: 0.5rem;
+}
+
+.quest-dates {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.info-card {
+  padding: 0.7rem;
+}
+
+.chip-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0;
+  margin: 0;
+}
+
+.chip {
+  border: 2px solid var(--line);
+  background: rgba(159, 122, 234, 0.3);
+  padding: 0.12rem 0.35rem;
+  border-radius: 0;
+}
+
+.stack-small p {
+  margin: 0.12rem 0;
+}
+
+.print-resume {
+  display: none;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes sprite-run {
+  0%,
+  24.99% {
+    background-position: 0 0;
+  }
+  25%,
+  49.99% {
+    background-position: -33px 0;
+  }
+  50%,
+  74.99% {
+    background-position: -66px 0;
+  }
+  75%,
+  99.99% {
+    background-position: -99px 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11pt;
+    line-height: 1.35;
+  }
+
+  .skip-link,
+  .control-row,
+  .actions-row,
+  .game-layout,
+  .info-grid {
+    display: none !important;
+  }
+
+  .page-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .hero {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0;
+    padding: 0 0 0.25cm;
+    margin: 0 0 0.2cm;
+    border-bottom: 1px solid #222 !important;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Times New Roman", Times, serif;
+    color: #111;
+  }
+
+  h1 {
+    font-size: 20pt;
+    text-align: center;
+    margin: 0 0 0.08cm;
+  }
+
+  .headline {
+    margin: 0;
+    text-align: center;
+    font-size: 11pt;
+    color: #222;
+  }
+
+  .print-resume {
+    display: block;
+  }
+
+  .print-section {
+    margin: 0 0 0.28cm;
+  }
+
+  .print-section h2 {
+    margin: 0 0 0.08cm;
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #222;
+    padding-bottom: 0.04cm;
+  }
+
+  .print-section ul {
+    margin: 0;
+    padding-left: 0.45cm;
+  }
+
+  .print-section li {
+    margin: 0 0 0.08cm;
+  }
+
+  .print-role {
+    margin: 0 0 0.18cm;
+  }
+
+  .print-role h3 {
+    font-size: 11pt;
+    margin: 0 0 0.03cm;
+  }
+
+  .print-role p {
+    margin: 0 0 0.05cm;
+    font-size: 10pt;
+  }
+
+  .chip-list {
+    list-style: disc;
+    display: block;
+    padding-left: 0.45cm;
+  }
+
+  .chip {
+    display: list-item;
+    border: none;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 0 0.08cm;
+    font-size: 10.5pt;
+  }
+}
