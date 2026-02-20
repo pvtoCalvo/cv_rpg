@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabla de decision AWS: ALB vs API Gateway vs NLB</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #1e293b;
+        --line: #334155;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #a78bfa;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(180deg, #0b1022 0%, #0f172a 100%);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(30, 41, 59, 0.55);
+        margin-bottom: 28px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 860px;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: rgba(15, 23, 42, 0.8);
+        color: #f8fafc;
+        font-weight: 700;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        color: var(--accent);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: #c4b5fd;
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="badge">AWS Decision Guide</span>
+      <h1>Tabla de decision: ALB vs API Gateway vs NLB (AWS)</h1>
+      <p>Guia rapida para elegir entrypoint y gestion de API segun necesidad funcional y operativa.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Si necesitas...</th>
+              <th>Elige</th>
+              <th>Por que (en 1 linea)</th>
+              <th>Patron tipico AWS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Trafico NO-HTTP</strong> (TCP/UDP), protocolos propios, IoT/telemetria</td>
+              <td><strong>NLB</strong></td>
+              <td>Balanceo <strong>L4</strong> para TCP/UDP/TLS/QUIC, muy eficiente a nivel de red</td>
+              <td>Internet/VPC -&gt; <strong>NLB</strong> -&gt; servicio (ECS/EKS/EC2)</td>
+            </tr>
+            <tr>
+              <td><strong>HTTP/HTTPS</strong> con <strong>routing por host/path/headers</strong> (p. ej. <code>/users</code> vs <code>/orders</code>)</td>
+              <td><strong>ALB</strong></td>
+              <td>Balanceo <strong>L7</strong> con reglas avanzadas de enrutamiento</td>
+              <td>Internet/VPC -&gt; <strong>ALB</strong> -&gt; Target Groups (ECS/EKS/EC2/Lambda)</td>
+            </tr>
+            <tr>
+              <td>Publicar una <strong>API como producto</strong> (auth, cuotas, throttling, stages)</td>
+              <td><strong>API Gateway</strong></td>
+              <td>Capa de <strong>API management</strong> gestionado</td>
+              <td>Clientes -&gt; <strong>API Gateway</strong> -&gt; (Lambda) o (VPC Link -&gt; ALB/NLB)</td>
+            </tr>
+            <tr>
+              <td><strong>WebSocket</strong> para tiempo real (rutas <code>$connect</code>/<code>$disconnect</code>)</td>
+              <td><strong>API Gateway (WebSocket API)</strong></td>
+              <td>WebSocket nativo orientado a APIs y rutas</td>
+              <td>Clientes -&gt; <strong>WebSocket API</strong> -&gt; Lambda/HTTP backend</td>
+            </tr>
+            <tr>
+              <td><strong>WebSockets</strong> como parte de una app web (upgrade WS dentro de la app)</td>
+              <td><strong>ALB</strong></td>
+              <td>Soporta WebSockets y enrutamiento HTTP</td>
+              <td>Internet -&gt; <strong>ALB</strong> -&gt; app</td>
+            </tr>
+            <tr>
+              <td><strong>gRPC</strong> hacia microservicios</td>
+              <td><strong>ALB</strong></td>
+              <td>Encaja bien con routing L7 (HTTP/2/gRPC)</td>
+              <td>Internet/VPC -&gt; <strong>ALB</strong> -&gt; servicios gRPC</td>
+            </tr>
+            <tr>
+              <td><strong>IP estatica</strong> de entrada o <strong>preservar IP origen</strong> del cliente</td>
+              <td><strong>NLB</strong></td>
+              <td>Mejor opcion para requisitos de red/L4 y origen</td>
+              <td>Internet -&gt; <strong>NLB</strong> -&gt; servicio</td>
+            </tr>
+            <tr>
+              <td>Backend en <strong>VPC privado</strong> pero API publica con gobierno</td>
+              <td><strong>API Gateway + VPC Link</strong></td>
+              <td>API publica + backend privado (sin exponer ALB/NLB)</td>
+              <td>Clientes -&gt; <strong>API GW</strong> -&gt; <strong>VPC Link</strong> -&gt; ALB/NLB privado -&gt; servicios</td>
+            </tr>
+            <tr>
+              <td>Quieres <strong>CORS + JWT/OIDC</strong> y una API "ligera"</td>
+              <td><strong>API Gateway (HTTP API)</strong></td>
+              <td>Mas simple/ligero para APIs HTTP modernas</td>
+              <td>Clientes -&gt; <strong>HTTP API</strong> -&gt; Lambda / VPC Link</td>
+            </tr>
+            <tr>
+              <td>Necesitas <strong>API Keys / Usage Plans</strong>, validacion avanzada, cache de stage, features enterprise</td>
+              <td><strong>API Gateway (REST API)</strong></td>
+              <td>Set mas completo de funcionalidades</td>
+              <td>Clientes -&gt; <strong>REST API</strong> -&gt; Lambda / VPC Link</td>
+            </tr>
+            <tr>
+              <td>Solo necesitas front door HTTP (TLS, health checks, balanceo) sin gestion de API</td>
+              <td><strong>ALB</strong></td>
+              <td>Balanceo L7 estandar para apps HTTP</td>
+              <td>Internet -&gt; <strong>ALB</strong> -&gt; app</td>
+            </tr>
+            <tr>
+              <td><strong>WAF</strong> en la entrada (seguridad L7)</td>
+              <td><strong>API Gateway (REST)</strong> o <strong>ALB + WAF</strong></td>
+              <td>Depende si es API-producto (GW) o app (ALB)</td>
+              <td>(Opcional CloudFront+WAF) -&gt; GW/ALB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Tabla de decision: tipos de API Gateway (HTTP API vs REST API vs WebSocket API)</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Si necesitas...</th>
+              <th>Tipo de API Gateway</th>
+              <th>Recomendacion rapida</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>API HTTP "moderna", simple, con JWT/OIDC, CORS, menor complejidad</td>
+              <td><strong>HTTP API</strong></td>
+              <td>Elige esta por defecto si no necesitas features avanzadas</td>
+            </tr>
+            <tr>
+              <td>Planes por cliente, API Keys/Usage Plans, validacion mas potente, cache de stage, mas controles</td>
+              <td><strong>REST API</strong></td>
+              <td>Elige esta si necesitas gobierno y funcionalidades "enterprise"</td>
+            </tr>
+            <tr>
+              <td>Comunicacion bidireccional en tiempo real (chat, live updates)</td>
+              <td><strong>WebSocket API</strong></td>
+              <td>Elige esta si necesitas conexion persistente y push desde backend</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Regla rapida (ultra-resumen)</h2>
+      <ul>
+        <li><strong>No es HTTP</strong> -&gt; <strong>NLB</strong></li>
+        <li>Es <strong>HTTP</strong> y quieres <strong>routing L7</strong> (host/path) -&gt; <strong>ALB</strong></li>
+        <li>Necesitas <strong>API management</strong> (auth/cuotas/planes/stages) -&gt; <strong>API Gateway</strong></li>
+        <li>Simple/ligero -&gt; <strong>HTTP API</strong></li>
+        <li>Avanzado/enterprise -&gt; <strong>REST API</strong></li>
+        <li>Tiempo real bidireccional -&gt; <strong>WebSocket API</strong></li>
+      </ul>
+    </main>
+  </body>
+</html>
