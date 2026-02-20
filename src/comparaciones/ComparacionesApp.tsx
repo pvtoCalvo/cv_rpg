@@ -51,7 +51,30 @@ function titleFromMarkdown(markdown: string, fallback: string): string {
 }
 
 function inferCategory(filename: string, content: string): GuideCategory {
+  const name = filename.toLowerCase();
   const signal = `${filename} ${content}`.toLowerCase();
+
+  if (
+    name === "index.md" ||
+    name.startsWith("aks-vs-") ||
+    name.startsWith("azure-") ||
+    name.startsWith("blob-vs-") ||
+    name.startsWith("service-bus-vs-") ||
+    name.startsWith("front-door-vs-")
+  ) {
+    return name === "index.md" ? "other" : "azure";
+  }
+
+  if (
+    name.startsWith("alb-vs-") ||
+    name.startsWith("ecs-vs-") ||
+    name.startsWith("sqs-vs-") ||
+    name.startsWith("s3-vs-") ||
+    name.startsWith("rds-vs-") ||
+    name.startsWith("cloudfront-vs-")
+  ) {
+    return "aws";
+  }
 
   if (/(aws|alb|nlb|api gateway|ecs|eks|ec2|sqs|sns|eventbridge|aurora|rds|dynamodb|cloudfront)/.test(signal)) {
     return "aws";
