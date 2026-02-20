@@ -48,12 +48,12 @@ function titleFromMarkdown(markdown: string, fallback: string): string {
 function inferCategory(filename: string, content: string): GuideCategory {
   const signal = `${filename} ${content}`.toLowerCase();
 
-  if (/(monitor|monitorizacion|observability|prometheus|grafana|datadog|elk|cloudwatch)/.test(signal)) {
-    return "monitoring";
-  }
-
   if (/(aws|alb|nlb|api gateway|ecs|eks|ec2|sqs|sns|eventbridge|aurora|rds|dynamodb|cloudfront)/.test(signal)) {
     return "aws";
+  }
+
+  if (/(monitor|monitorizacion|observability|prometheus|grafana|datadog|elk|cloudwatch)/.test(signal)) {
+    return "monitoring";
   }
 
   return "other";
@@ -203,7 +203,7 @@ export default function ComparacionesApp() {
         <section className="comparaciones-card doc-card" aria-live="polite">
           {selectedGuide ? (
             <>
-              <p className="doc-meta">Documento: {selectedGuide.filename}</p>
+              <p className="doc-meta">Guia activa: {selectedGuide.title}</p>
               <article className="markdown-body" dangerouslySetInnerHTML={{ __html: html }} />
             </>
           ) : (

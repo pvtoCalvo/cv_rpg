@@ -4,12 +4,12 @@ Tabla resumen:
 
 | Comparativa | Útil cuando… | Documento |
 |---|---|---|
-| ALB vs API Gateway vs NLB | Estás eligiendo front door, tipo de balanceo y nivel de gestión de API | ./alb-vs-api-gateway-vs-nlb.md |
-| ECS vs EC2 vs EKS (incluye Fargate) | Estás eligiendo plataforma de contenedores y nivel de operación | ./ecs-vs-ec2-vs-eks.md |
-| SQS vs SNS vs EventBridge | Estás diseñando mensajería/eventos y desacople entre servicios | ./sqs-vs-sns-vs-eventbridge.md |
-| S3 vs EBS vs EFS vs FSx | Estás eligiendo tipo de almacenamiento (objeto/bloque/archivo) | ./s3-vs-ebs-vs-efs-vs-fsx.md |
-| RDS vs Aurora vs DynamoDB | Estás eligiendo base de datos (relacional vs NoSQL) | ./rds-vs-aurora-vs-dynamodb.md |
-| CloudFront vs Global Accelerator | Estás optimizando entrega global (CDN vs aceleración L4) | ./cloudfront-vs-global-accelerator.md |
+| ALB vs API Gateway vs NLB | Estás eligiendo front door, tipo de balanceo y nivel de gestión de API | [Abrir en comparaciones](#guide=alb-vs-api-gateway-vs-nlb) |
+| ECS vs EC2 vs EKS (incluye Fargate) | Estás eligiendo plataforma de contenedores y nivel de operación | [Abrir en comparaciones](#guide=ecs-vs-ec2-vs-eks) |
+| SQS vs SNS vs EventBridge | Estás diseñando mensajería/eventos y desacople entre servicios | [Abrir en comparaciones](#guide=sqs-vs-sns-vs-eventbridge) |
+| S3 vs EBS vs EFS vs FSx | Estás eligiendo tipo de almacenamiento (objeto/bloque/archivo) | [Abrir en comparaciones](#guide=s3-vs-ebs-vs-efs-vs-fsx) |
+| RDS vs Aurora vs DynamoDB | Estás eligiendo base de datos (relacional vs NoSQL) | [Abrir en comparaciones](#guide=rds-vs-aurora-vs-dynamodb) |
+| CloudFront vs Global Accelerator | Estás optimizando entrega global (CDN vs aceleración L4) | [Abrir en comparaciones](#guide=cloudfront-vs-global-accelerator) |
 
 ## Cómo usar estas guías
 
