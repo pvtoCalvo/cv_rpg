@@ -1,4 +1,18 @@
-# AWS Decision Guides Internos (Comparativas)
+# Decision Guides Internos (Comparativas)
+
+## Azure (Decision Guides)
+
+Tabla resumen:
+
+| Comparativa | Útil cuando… | Documento |
+|---|---|---|
+| AKS vs Container Apps vs App Service (Containers) vs VMs | Estás eligiendo plataforma de contenedores/cómputo (Kubernetes vs serverless vs PaaS vs IaaS) | [Abrir en comparaciones](#guide=aks-vs-container-apps-vs-app-service-vs-vms) |
+| Service Bus vs Event Grid vs Event Hubs vs Queue Storage | Estás eligiendo mensajería/eventos/streaming y desacople entre sistemas | [Abrir en comparaciones](#guide=service-bus-vs-event-grid-vs-event-hubs-vs-queue-storage) |
+| Blob vs Managed Disks vs Azure Files vs Azure NetApp Files | Estás eligiendo almacenamiento (objeto vs bloque vs archivo, performance y protocolos) | [Abrir en comparaciones](#guide=blob-vs-managed-disks-vs-azure-files-vs-azure-netapp-files) |
+| Azure SQL DB vs Managed Instance vs SQL VM vs Cosmos DB | Estás eligiendo base de datos (relacional PaaS/IaaS vs NoSQL global) | [Abrir en comparaciones](#guide=azure-sql-vs-managed-instance-vs-sql-vm-vs-cosmosdb) |
+| Front Door vs Traffic Manager vs CDN vs App Gateway vs Load Balancer | Estás eligiendo entrada global/regional y balanceo (DNS vs L7 vs L4) | [Abrir en comparaciones](#guide=front-door-vs-traffic-manager-vs-cdn-vs-app-gateway-vs-load-balancer) |
+
+## AWS (Decision Guides)
 
 Tabla resumen:
 

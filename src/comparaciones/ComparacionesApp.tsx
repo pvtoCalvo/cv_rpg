@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
 
-type GuideCategory = "aws" | "monitoring" | "other";
+type GuideCategory = "aws" | "azure" | "monitoring" | "other";
 
 type Guide = {
   id: string;
@@ -19,6 +19,11 @@ const rawDocs = import.meta.glob("../../docs/*.md", {
 
 const preferredOrder = [
   "index.md",
+  "aks-vs-container-apps-vs-app-service-vs-vms.md",
+  "service-bus-vs-event-grid-vs-event-hubs-vs-queue-storage.md",
+  "blob-vs-managed-disks-vs-azure-files-vs-azure-netapp-files.md",
+  "azure-sql-vs-managed-instance-vs-sql-vm-vs-cosmosdb.md",
+  "front-door-vs-traffic-manager-vs-cdn-vs-app-gateway-vs-load-balancer.md",
   "alb-vs-api-gateway-vs-nlb.md",
   "ecs-vs-ec2-vs-eks.md",
   "sqs-vs-sns-vs-eventbridge.md",
@@ -50,6 +55,14 @@ function inferCategory(filename: string, content: string): GuideCategory {
 
   if (/(aws|alb|nlb|api gateway|ecs|eks|ec2|sqs|sns|eventbridge|aurora|rds|dynamodb|cloudfront)/.test(signal)) {
     return "aws";
+  }
+
+  if (
+    /azure|aks|container apps|app service|service bus|event grid|event hubs|queue storage|blob|managed disks|azure files|netapp|cosmos db|front door|traffic manager|app gateway|sql vm/.test(
+      signal
+    )
+  ) {
+    return "azure";
   }
 
   if (/(monitor|monitorizacion|observability|prometheus|grafana|datadog|elk|cloudwatch)/.test(signal)) {
@@ -101,6 +114,7 @@ const initialGuideId =
   guides.find((guide) => guide.id === "alb-vs-api-gateway-vs-nlb")?.id ?? guides[0]?.id ?? "";
 
 const sectionConfig: Array<{ id: GuideCategory; label: string }> = [
+  { id: "azure", label: "Azure" },
   { id: "aws", label: "AWS" },
   { id: "monitoring", label: "Monitorizacion" },
   { id: "other", label: "Otros" }
@@ -159,10 +173,6 @@ export default function ComparacionesApp() {
       <header className="comparaciones-card hero">
         <p className="tag">Decision Guides</p>
         <h1>Comparaciones</h1>
-        <p className="lead">
-          SPA independiente basada en Markdown desde <code>/docs</code>. Incluye AWS y guias de monitorizacion
-          cuando existan.
-        </p>
       </header>
 
       <div className="comparaciones-layout">
