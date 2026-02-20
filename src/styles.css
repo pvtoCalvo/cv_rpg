@@ -368,6 +368,11 @@ h1 {
   padding: 0.7rem;
 }
 
+.info-subtitle {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+}
+
 .chip-list {
   list-style: none;
   display: flex;
@@ -386,6 +391,25 @@ h1 {
 
 .stack-small p {
   margin: 0.12rem 0;
+}
+
+.link-list {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.link-list li {
+  margin: 0.2rem 0;
+}
+
+.inline-link {
+  color: #e9ddff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.inline-link:hover {
+  color: #fff;
 }
 
 .print-resume {

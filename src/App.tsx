@@ -34,6 +34,10 @@ function uiCopy(lang: ResumeLang): {
   summaryTitle: string;
   impactTitle: string;
   skillsTitle: string;
+  comparisonsTitle: string;
+  awsSectionTitle: string;
+  awsEntryLabel: string;
+  awsHubLabel: string;
   certifications: string;
   languages: string;
 } {
@@ -54,6 +58,10 @@ function uiCopy(lang: ResumeLang): {
       summaryTitle: "Resumen",
       impactTitle: "Impacto",
       skillsTitle: "Habilidades",
+      comparisonsTitle: "Comparaciones",
+      awsSectionTitle: "Seccion AWS",
+      awsEntryLabel: "ALB vs API Gateway vs NLB",
+      awsHubLabel: "Abrir centro de comparaciones AWS",
       certifications: "Certificaciones",
       languages: "Idiomas"
     };
@@ -75,6 +83,10 @@ function uiCopy(lang: ResumeLang): {
     summaryTitle: "Summary",
     impactTitle: "Impact",
     skillsTitle: "Skills",
+    comparisonsTitle: "Comparisons",
+    awsSectionTitle: "AWS section",
+    awsEntryLabel: "ALB vs API Gateway vs NLB",
+    awsHubLabel: "Open AWS comparisons hub",
     certifications: "Certifications",
     languages: "Languages"
   };
@@ -420,6 +432,23 @@ export default function App() {
         <article className="card info-card">
           <h2>{copy.skillsTitle}</h2>
           {renderSectionContent("skills", resume, copy, displayLang)}
+        </article>
+
+        <article className="card info-card">
+          <h2>{copy.comparisonsTitle}</h2>
+          <p className="info-subtitle">{copy.awsSectionTitle}</p>
+          <ul className="link-list">
+            <li>
+              <a className="inline-link" href="/aws-decision-alb-apigw/" target="_blank" rel="noreferrer">
+                {copy.awsEntryLabel}
+              </a>
+            </li>
+            <li>
+              <a className="inline-link" href="/comparaciones/" target="_blank" rel="noreferrer">
+                {copy.awsHubLabel}
+              </a>
+            </li>
+          </ul>
         </article>
       </section>
 
