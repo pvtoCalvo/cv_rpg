@@ -7,6 +7,7 @@ SPA en React + Vite + TypeScript con estilo RPG pixel-art para presentar el CV.
 - Cambio de idioma EN/ES (EN por defecto).
 - Timeline de experiencia interactivo.
 - Vista de impresion para guardar en PDF.
+- SPA independiente de comparaciones tecnicas en path `/comparaciones`.
 - Soporte Docker con Nginx y fallback SPA.
 
 ## Requisitos
@@ -24,6 +25,7 @@ npm run dev
 
 Abrir en navegador:
 - `http://localhost:5173`
+- `http://localhost:5173/comparaciones/`
 
 ## Build de produccion (sin Docker)
 ```bash
@@ -40,6 +42,7 @@ docker compose up -d --build
 
 Abrir en navegador:
 - `http://localhost:8081`
+- `http://localhost:8081/comparaciones/`
 
 ## Ejecucion Docker para produccion
 Usa el compose de produccion con contenedor endurecido y healthcheck:
@@ -52,6 +55,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 Abrir en navegador:
 - `http://TU_SERVIDOR:${CV_PORT}` (por defecto `8081`)
+- `http://TU_SERVIDOR:${CV_PORT}/comparaciones/`
 
 ## Verificar salud del contenedor
 ```bash
@@ -79,6 +83,9 @@ docker compose up -d
 - `src/resume.data.ts`: datos base del CV.
 - `src/resume.builders.ts`: generacion de contenido/markdown/json.
 - `src/styles.css`: estilos pixel-art y vista de impresion.
+- `comparaciones/index.html`: entrada de la SPA independiente de comparaciones.
+- `src/comparaciones/`: codigo React de comparaciones (navegacion y render Markdown).
+- `docs/`: guias Markdown fuente para comparaciones (AWS/monitorizacion/otros).
 - `public/sprites/`: sprite sheets del personaje.
 - `Dockerfile`: build y runtime con Nginx.
 - `docker-compose.yml`: servicio Docker (puerto `8081`).
@@ -89,3 +96,4 @@ docker compose up -d
 - Si el puerto `8081` ya esta ocupado en tu servidor, cambia `docker-compose.yml`.
 - Para exportar PDF usa el boton `Print / Save PDF` en la web.
 - Para cambiar el puerto en produccion, ajusta `CV_PORT` en `.env`.
+- Para agregar nuevas comparativas, crea un `.md` dentro de `docs/`; la SPA `/comparaciones` lo carga automaticamente.
